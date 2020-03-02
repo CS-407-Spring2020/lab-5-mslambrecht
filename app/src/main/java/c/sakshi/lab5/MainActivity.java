@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //String usernameKey = "username";
 
         SharedPreferences sharedPreferences = getSharedPreferences("<c.sakshi.lab5>", Context.MODE_PRIVATE);
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
-        return super.getSharedPreferences("<c.sakshi.lab5.Main2Activity>",Context.MODE_PRIVATE);
+        return super.getSharedPreferences("<c.sakshi.lab5>",Context.MODE_PRIVATE);
 
     }
 }

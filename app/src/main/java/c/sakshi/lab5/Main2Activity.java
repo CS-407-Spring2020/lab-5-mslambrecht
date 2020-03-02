@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -26,6 +29,11 @@ public class Main2Activity extends AppCompatActivity {
         Intent intent = getIntent();
         String str = intent.getStringExtra("message");
         textView2.setText("Welcome " + str + "!");
+        //Context context = getApplicationContext();
+        //SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("notes",
+        //        Context.MODE_PRIVATE,null);
+        //DBHelper newHelper = new DBHelper(sqLiteDatabase);
+        //newHelper.readNotes(str);
     }
 
     @Override
@@ -44,7 +52,6 @@ public class Main2Activity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("<c.sakshi.lab5>", Context.MODE_PRIVATE);
                 sharedPreferences.edit().remove("username").apply();
                 finish();
-                startActivity(intent);
                 return true;
             case R.id.addnote:
                 Intent intent2 = new Intent(this, Main3Activity.class);
