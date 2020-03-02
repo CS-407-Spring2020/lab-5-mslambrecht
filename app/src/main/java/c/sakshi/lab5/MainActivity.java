@@ -11,18 +11,16 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        String usernameKey = "username";
 
-        String usernamekey = "username";
         SharedPreferences sharedPreferences = getSharedPreferences("c.sakshi.lab5", Context.MODE_PRIVATE);
 
-        if (!sharedPreferences.getString(usernamekey, "").equals("")) {
-
+        if (!sharedPreferences.getString(usernameKey, "").equals("")) {
+            String str = sharedPreferences.getString(usernameKey, "");
+            goToActivity2(str);
         } else {
             setContentView(R.layout.activity_main);
         }
@@ -32,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
         EditText myTextField = (EditText) findViewById(R.id.loginView);
         String str = myTextField.getText().toString();
         SharedPreferences sharedPreferences = getSharedPreferences("<c.sakshi.lab5.Main2Activity>", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString("username", str);
+        sharedPreferences.edit().putString("username", str).apply();
         goToActivity2(str);
-
     }
 
     public void goToActivity2(String s) {

@@ -37,14 +37,19 @@ public class Main2Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent intent = new Intent(this, MainActivity.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("c.sakshi.lab5", Context.MODE_PRIVATE);
-                sharedPreferences.edit().remove(MainActivity.usernamekey).apply();
+                sharedPreferences.edit().remove("username").apply();
+                finish();
                 startActivity(intent);
                 return true;
             case R.id.addnote:
+                Intent intent2 = new Intent(this, Main3Activity.class);
+                SharedPreferences sharedPreferences2 = getSharedPreferences("c.sakshi.lab5", Context.MODE_PRIVATE);
+                startActivity(intent2);
                 return true;
 
 
