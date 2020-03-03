@@ -11,14 +11,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
     TextView textView2;
+    public static ArrayList<Note> notes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +36,28 @@ public class Main2Activity extends AppCompatActivity {
         Intent intent = getIntent();
         String str = intent.getStringExtra("message");
         textView2.setText("Welcome " + str + "!");
-        //Context context = getApplicationContext();
-        //SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("notes",
-        //        Context.MODE_PRIVATE,null);
-        //DBHelper newHelper = new DBHelper(sqLiteDatabase);
-        //newHelper.readNotes(str);
+        Context context = getApplicationContext();
+        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("notes",
+                Context.MODE_PRIVATE,null);
+        DBHelper newHelper = new DBHelper(sqLiteDatabase);
+        notes = newHelper.readNotes(str);
+
+        ArrayList<String> displayNotes = new ArrayList<>();
+        for (Note note : notes) {
+            displayNotes.add(String.format("Title:%s\nDate:%s", note.getTitle(), note.getDate()));
+        }
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displayNotes);
+        ListView listView = (ListView) findViewById(R.id.listview1);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), Main3Activity.class);
+                intent.putExtra("noteid", position);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
