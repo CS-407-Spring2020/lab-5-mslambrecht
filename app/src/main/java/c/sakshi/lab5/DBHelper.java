@@ -13,7 +13,7 @@ public class DBHelper {
     public void createTable() {
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS notes" +
-                "(id INTEGER PRIMARY KEY, username TEXT, title TEXT, content TEXT, src TEXT)");
+                "(id INTEGER PRIMARY KEY, username TEXT, date TEXT, title TEXT, content TEXT, src TEXT)");
     }
 
     public ArrayList<Note> readNotes(String username) {

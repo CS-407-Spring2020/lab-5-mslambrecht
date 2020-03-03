@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToActivity2(String s) {
         Intent intent = new Intent(this, Main2Activity.class);
+        intent.putExtra(usernameKey, s);
         startActivity(intent);
     }
 

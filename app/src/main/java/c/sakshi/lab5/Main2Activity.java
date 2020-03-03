@@ -79,6 +79,7 @@ public class Main2Activity extends AppCompatActivity {
                 return true;
             case R.id.addnote:
                 Intent intent2 = new Intent(this, Main3Activity.class);
+                intent2.putExtra("noteid", -1);
                 startActivity(intent2);
                 return true;
 

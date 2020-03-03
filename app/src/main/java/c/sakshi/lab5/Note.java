@@ -14,7 +14,7 @@ public class Note {
         this.content = content;
     }
 
-    public String getDate() { return date;}
+    public String getDate() {return date;}
 
     public String getUsername() {return username;}
 
