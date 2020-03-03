@@ -16,31 +16,28 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
-    TextView textView2;
     public static ArrayList<Note> notes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        textView2 = (TextView) findViewById(R.id.mytextView);
-        Intent intent = getIntent();
-        String str = intent.getStringExtra("message");
+
+        TextView textView2 = (TextView) findViewById(R.id.greeting);
+        SharedPreferences sharedPreferences = getSharedPreferences("<c.sakshi.lab5>", Context.MODE_PRIVATE);
+        String str = sharedPreferences.getString("username", "");
         textView2.setText("Welcome " + str + "!");
+
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("notes",
                 Context.MODE_PRIVATE,null);
-        DBHelper newHelper = new DBHelper(sqLiteDatabase);
-        notes = newHelper.readNotes(str);
+        DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+        notes = dbHelper.readNotes(str);
 
         ArrayList<String> displayNotes = new ArrayList<>();
         for (Note note : notes) {
@@ -49,6 +46,7 @@ public class Main2Activity extends AppCompatActivity {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displayNotes);
         ListView listView = (ListView) findViewById(R.id.listview1);
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,6 +57,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +74,7 @@ public class Main2Activity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("<c.sakshi.lab5>", Context.MODE_PRIVATE);
                 sharedPreferences.edit().remove("username").apply();
+                startActivity(intent);
                 finish();
                 return true;
             case R.id.addnote:

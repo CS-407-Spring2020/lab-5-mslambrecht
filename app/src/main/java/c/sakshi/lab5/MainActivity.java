@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedPreferences = getSharedPreferences("<c.sakshi.lab5>", Context.MODE_PRIVATE);
-
+        //sharedPreferences.edit().remove("username").apply();
         if (!sharedPreferences.getString(usernameKey, "").equals("")) {
             String str = sharedPreferences.getString(usernameKey, "");
             goToActivity2(str);
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToActivity2(String s) {
         Intent intent = new Intent(this, Main2Activity.class);
-        intent.putExtra("message", s);
         startActivity(intent);
     }
 
