@@ -62,8 +62,8 @@ public class Main3Activity extends AppCompatActivity {
             dbHelper.updateNote(title, date, content, username);
         }
 
-        finish();
-        //Intent intent = new Intent(this, Main2Activity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
+
     }
 }
